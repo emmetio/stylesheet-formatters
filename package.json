@@ -1,0 +1,37 @@
+{
+  "name": "@emmetio/stylesheet-formatters",
+  "version": "0.0.1",
+  "description": "Outputs parsed Emmet abbreviation as stylesheet (CSS, Sass, LESS etc)",
+  "main": "dist/stylesheet-formatters.cjs.js",
+  "module": "dist/stylesheet-formatters.es.js",
+  "scripts": {
+    "test": "mocha",
+	"build": "rollup -c",
+    "prepublish": "npm test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmetio/stylesheet-formatters.git"
+  },
+  "keywords": [],
+  "author": "Sergey Chikuyonok <serge.che@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emmetio/stylesheet-formatters/issues"
+  },
+  "homepage": "https://github.com/emmetio/stylesheet-formatters#readme",
+  "devDependencies": {
+    "@emmetio/css-abbreviation": "^0.2.2",
+    "@emmetio/css-snippets-resolver": "^0.1.0",
+    "@emmetio/output-profile": "^0.1.4",
+    "@emmetio/snippets-registry": "^0.3.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.22.0",
+    "babel-register": "^6.22.0",
+    "mocha": "^3.2.0",
+    "rollup": "^0.41.4"
+  },
+  "dependencies": {
+    "@emmetio/field-parser": "^0.2.0",
+    "@emmetio/output-renderer": "^0.1.0"
+  }
+}
