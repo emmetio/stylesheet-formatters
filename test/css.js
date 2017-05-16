@@ -4,7 +4,7 @@ const assert = require('assert');
 const parse = require('@emmetio/css-abbreviation');
 const SnippetsRegistry = require('@emmetio/snippets-registry');
 const Profile = require('@emmetio/output-profile');
-const resolveSnippets = require('@emmetio/css-snippets-resolver');
+const resolveSnippets = require('@emmetio/css-snippets-resolver').default;
 require('babel-register');
 const stringify = require('../index').default;
 
@@ -29,7 +29,7 @@ registry.add({
 });
 
 function expand(abbr, profile, syntax, options) {
-	const tree = parse(abbr).use(resolveSnippets, registry);
+	const tree = resolveSnippets(parse(abbr), registry);
     return stringify(tree, profile || new Profile(), syntax, options);
 }
 

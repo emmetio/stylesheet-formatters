@@ -21,13 +21,13 @@
   },
   "homepage": "https://github.com/emmetio/stylesheet-formatters#readme",
   "devDependencies": {
-    "@emmetio/css-abbreviation": "^0.2.2",
-    "@emmetio/css-snippets-resolver": "^0.1.0",
-    "@emmetio/output-profile": "^0.1.4",
+    "@emmetio/css-abbreviation": "^0.3.1",
+    "@emmetio/css-snippets-resolver": "^0.2.5",
+    "@emmetio/output-profile": "^0.1.5",
     "@emmetio/snippets-registry": "^0.3.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.22.0",
-    "babel-register": "^6.22.0",
-    "mocha": "^3.2.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "mocha": "^3.4.1",
     "rollup": "^0.41.4"
   },
   "dependencies": {
