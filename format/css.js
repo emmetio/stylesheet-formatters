@@ -27,7 +27,8 @@ export default function css(tree, profile, options) {
 		let value = String(node.value || '');
 
 		if (node.attributes.length) {
-			value = injectIntoField(value, stringifyAttributeList(node.attributes, options));
+			const fieldValues = node.attributes.map(attr => stringifyAttribute(attr, options));
+			value = injectFields(value, fieldValues);
 		}
 
 		outNode.open = node.name && profile.name(node.name);
@@ -50,34 +51,41 @@ export default function css(tree, profile, options) {
 }
 
 /**
- * Injects given `value` instead of first field/tabstop of `string`.
- * If no fields in `string`, `value` is not injected
- * @param  {String} string
- * @param  {String} value
+ * Injects given field values at each field of given string
+ * @param  {String}   string
+ * @param  {String[]} attributes
  * @return {FieldString}
  */
-function injectIntoField(string, value) {
+function injectFields(string, values) {
 	const fieldsModel = parseFields(string);
+	const fieldsAmount = fieldsModel.fields.length;
 
-	if (fieldsModel.fields.length) {
-		const field = fieldsModel.fields.shift();
+	if (fieldsAmount) {
+		values = values.slice();
+		if (values.length > fieldsAmount) {
+			// More values that output fields: collapse rest values into
+			// a single token
+			values = values.slice(0, fieldsAmount - 1)
+				.concat(values.slice(fieldsAmount - 1).join(', '));
+		}
 
-		// Inject value into first field
-		fieldsModel.string = fieldsModel.string.slice(0, field.location)
-			+ value
-			+ fieldsModel.string.slice(field.location + field.length);
+		while (values.length) {
+			const value = values.shift();
+			const field = fieldsModel.fields.shift();
+			const delta = value.length - field.length;
 
-		// Update location of the rest fields in string
-		for (let i = 0, il = fieldsModel.fields.length; i < il; i++) {
-			fieldsModel.fields[i].location += value.length;
+			fieldsModel.string = fieldsModel.string.slice(0, field.location)
+				+ value
+				+ fieldsModel.string.slice(field.location + field.length);
+
+			// Update location of the rest fields in string
+			for (let i = 0, il = fieldsModel.fields.length; i < il; i++) {
+				fieldsModel.fields[i].location += delta;
+			}
 		}
 	}
 
 	return fieldsModel;
-}
-
-function stringifyAttributeList(attributes, options) {
-	return attributes.map(attr => stringifyAttribute(attr, options)).join(', ');
 }
 
 function stringifyAttribute(attr, options) {

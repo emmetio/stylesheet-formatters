@@ -24,7 +24,8 @@ registry.add({
     "z": "z-index:1",
     "bd": "border:${1:1px} ${2:solid} ${3:#000}",
     "bds": "border-style:hidden|dotted|dashed|solid|double|dot-dash|dot-dot-dash|wave|groove|ridge|inset|outset",
-	"lg": "background-image:linear-gradient(${1})"
+	"lg": "background-image:linear-gradient(${1})",
+	"trf": "transform:scale(${1:x-coord}, ${2:y})"
 });
 
 function expand(abbr, profile, syntax, options) {
@@ -48,8 +49,11 @@ describe('CSS Output', () => {
 	});
 
 	it('attributes', () => {
+		const opt = {field: (index, placeholder) => `\${${index}${placeholder ? ':' + placeholder : ''}}`};
 		assert.equal(expand('lg'), 'background-image: linear-gradient();');
 		assert.equal(expand('lg(to right, #0, #f00.5)'), 'background-image: linear-gradient(to right, #000, rgba(255, 0, 0, 0.5));');
+		assert.equal(expand('trf-s(2)', null, opt), 'transform: scale(2, ${3:y});');
+		assert.equal(expand('trf-s(2, 3)', null, opt), 'transform: scale(2, 3);');
 	});
 
 	it('snippets', () => {
