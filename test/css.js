@@ -18,7 +18,7 @@ registry.add({
     "bgo": "background-origin:padding-box|border-box|content-box",
     "c": "color:#${1:000}",
     "cl": "clear:both|left|right|none",
-    "pos": "position:relative|absolute|relative|fixed|static",
+    "pos": "position:relative|absolute|fixed|static",
     "m": "margin",
     "p": "padding",
     "z": "z-index:1",
