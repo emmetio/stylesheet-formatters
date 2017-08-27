@@ -78,5 +78,5 @@ function getFormat(syntax, options) {
 		format = syntaxFormat[format];
 	}
 
-	return Object.assign({}, format, options && options.format);
+	return Object.assign({}, format, options && options.stylesheet);
 }
