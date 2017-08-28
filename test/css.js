@@ -61,4 +61,14 @@ describe('CSS Output', () => {
 		assert.equal(expand('@kf'), '@keyframes identifier {\n\t\n}');
 		assert.equal(expand('@kf', null, opt), '@keyframes ${2:identifier} {\n\t${3}\n}');
 	});
+
+	it('format', () => {
+		const opt = {
+			stylesheet: {
+				"between": ":: ",
+				"after": ";;"
+			}
+		};
+		assert.equal(expand('p', null, "css", opt), 'padding:: ;;');
+	})
 });
