@@ -25,7 +25,8 @@ registry.add({
     "bd": "border:${1:1px} ${2:solid} ${3:#000}",
     "bds": "border-style:hidden|dotted|dashed|solid|double|dot-dash|dot-dot-dash|wave|groove|ridge|inset|outset",
 	"lg": "background-image:linear-gradient(${1})",
-	"trf": "transform:scale(${1:x-coord}, ${2:y})"
+	"trf": "transform:scale(${1:x-coord}, ${2:y})",
+	"mten": "margin: 10px;"
 });
 
 function expand(abbr, profile, syntax, options) {
@@ -70,5 +71,9 @@ describe('CSS Output', () => {
 			}
 		};
 		assert.equal(expand('p', null, "css", opt), 'padding:: ;;');
+	});
+
+	it('should not add after if the after is already part of the snippet', () => {
+		assert.equal(expand('mten'), 'margin: 10px;');
 	})
 });
