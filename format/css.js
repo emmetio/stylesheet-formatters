@@ -35,7 +35,7 @@ export default function css(tree, profile, options) {
 		outNode.afterOpen = options.format.between;
 		outNode.text = outNode.renderFields(value || null);
 
-		if (outNode.open && (!outNode.text || !outNode.text.endsWith(options.format.after))) {
+		if (outNode.open && (!outNode.text || !outNode.text.endsWith(';'))) {
 			outNode.afterText = options.format.after;
 		}
 
