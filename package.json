@@ -1,6 +1,6 @@
 {
   "name": "@emmetio/stylesheet-formatters",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Outputs parsed Emmet abbreviation as stylesheet (CSS, Sass, LESS etc)",
   "main": "dist/stylesheet-formatters.cjs.js",
   "module": "dist/stylesheet-formatters.es.js",
