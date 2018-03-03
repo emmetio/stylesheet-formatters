@@ -3,12 +3,10 @@
 import render from '@emmetio/output-renderer';
 import parseFields from '@emmetio/field-parser';
 
-const defaultOptions = {
+const defaultFormatOptions = {
 	shortHex: true,
-	format: {
-		between: ': ',
-		after: ';'
-	}
+	between: ': ',
+	after: ';'
 };
 
 /**
@@ -20,23 +18,24 @@ const defaultOptions = {
  * @return {String}
  */
 export default function css(tree, profile, options) {
-	options = Object.assign({}, defaultOptions, options);
+	options = options || {};
+	const formatOpt = Object.assign({}, defaultFormatOptions, options && options.format);
 
 	return render(tree, options.field, outNode => {
 		const node = outNode.node;
 		let value = String(node.value || '');
 
 		if (node.attributes.length) {
-			const fieldValues = node.attributes.map(attr => stringifyAttribute(attr, options));
+			const fieldValues = node.attributes.map(attr => stringifyAttribute(attr, formatOpt));
 			value = injectFields(value, fieldValues);
 		}
 
 		outNode.open = node.name && profile.name(node.name);
-		outNode.afterOpen = options.format.between;
+		outNode.afterOpen = formatOpt.between;
 		outNode.text = outNode.renderFields(value || null);
 
 		if (outNode.open && (!outNode.text || !outNode.text.endsWith(';'))) {
-			outNode.afterText = options.format.after;
+			outNode.afterText = formatOpt.after;
 		}
 
 		if (profile.get('format')) {

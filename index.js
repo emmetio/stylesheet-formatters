@@ -55,7 +55,7 @@ export default function(tree, profile, syntax, options) {
 	// CSS abbreviations doesn’t support nesting so simply
 	// output root node children
 	return css(tree, profile, options);
-};
+}
 
 /**
  * Check if given syntax is supported
