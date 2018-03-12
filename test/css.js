@@ -5,8 +5,7 @@ const parse = require('@emmetio/css-abbreviation');
 const SnippetsRegistry = require('@emmetio/snippets-registry');
 const Profile = require('@emmetio/output-profile');
 const resolveSnippets = require('@emmetio/css-snippets-resolver').default;
-require('babel-register');
-const stringify = require('../index').default;
+const stringify = require('../').default;
 
 const registry = new SnippetsRegistry();
 registry.add({
@@ -65,7 +64,7 @@ describe('CSS Output', () => {
 
 	it('format', () => {
 		const opt = {
-			stylesheet: {
+			format: {
 				between: ':: ',
 				after: ';;'
 			}

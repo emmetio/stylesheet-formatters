@@ -1,9 +1,15 @@
 export default {
-	entry: './index.js',
+	input: './index.js',
 	external: ['@emmetio/output-renderer', '@emmetio/field-parser'],
-	exports: 'named',
-	targets: [
-		{format: 'cjs', dest: 'dist/stylesheet-formatters.cjs.js'},
-		{format: 'es',  dest: 'dist/stylesheet-formatters.es.js'}
-	]
+	output: [{
+		format: 'cjs',
+		sourcemap: true,
+		exports: 'named',
+		file: 'dist/stylesheet-formatters.cjs.js'
+	}, {
+		format: 'es',
+		sourcemap: true,
+		exports: 'named',
+		file: 'dist/stylesheet-formatters.es.js'
+	}]
 };
