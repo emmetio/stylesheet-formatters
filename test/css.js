@@ -35,6 +35,7 @@ function expand(abbr, profile, syntax, options) {
 
 describe('CSS Output', () => {
 	it('basic', () => {
+		assert.equal(expand('bg#f'), 'background: #fff;');
 		assert.equal(expand('p'), 'padding: ;');
 		assert.equal(expand('p0'), 'padding: 0;');
 		assert.equal(expand('p10'), 'padding: 10px;');

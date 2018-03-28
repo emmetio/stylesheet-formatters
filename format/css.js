@@ -23,10 +23,10 @@ export default function css(tree, profile, options) {
 
 	return render(tree, options.field, outNode => {
 		const node = outNode.node;
-		let value = String(node.value || '');
+		let value = stringifyValue(node, formatOpt);
 
 		if (node.attributes.length) {
-			const fieldValues = node.attributes.map(attr => stringifyAttribute(attr, formatOpt));
+			const fieldValues = node.attributes.map(attr => stringifyValue(attr, formatOpt));
 			value = injectFields(value, fieldValues);
 		}
 
@@ -87,9 +87,9 @@ function injectFields(string, values) {
 	return fieldsModel;
 }
 
-function stringifyAttribute(attr, options) {
-	if (attr.value && typeof attr.value === 'object' && attr.value.type === 'css-value') {
-		return attr.value.value
+function stringifyValue(node, options) {
+	if (node.value && typeof node.value === 'object' && node.value.type === 'css-value') {
+		return node.value.value
 		.map(token => {
 			if (token && typeof token === 'object') {
 				return token.type === 'color'
@@ -102,5 +102,5 @@ function stringifyAttribute(attr, options) {
 		.join(' ');
 	}
 
-	return attr.value != null ? String(attr.value) : '';
+	return node.value != null ? String(node.value) : '';
 }
